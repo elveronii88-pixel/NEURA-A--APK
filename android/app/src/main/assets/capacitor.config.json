@@ -1,0 +1,6 @@
+{
+	"appId": "com.lumina.neura",
+	"appName": "NeuraAI",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
