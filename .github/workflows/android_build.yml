@@ -4,6 +4,8 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v4
       
@@ -18,9 +20,14 @@ jobs:
 
       - name: Build APK
         run: |
-          cd android
-          chmod +x gradlew
-          ./gradlew assembleDebug
+          if [ -d "android" ]; then
+            cd android
+            chmod +x gradlew
+            ./gradlew assembleDebug
+          else
+            echo "HATA: android klasörü bulunamadı! Lütfen ana dizinde olduğundan emin ol."
+            exit 1
+          fi
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
